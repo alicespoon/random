@@ -3,23 +3,16 @@
   export let images = [];
 </script>
 
-<main>
-  {#if images.length > 0}
+{#if images.length > 0}
+  {#each images as image}
     <a href={igurl} target="_blank">
-      {#each images as image}
-        <img src={image.url} alt={image.filename} />
-      {/each}
+      <img src={image.url} alt={image.filename} />
     </a>
-  {/if}
-</main>
+  {/each}
+{/if}
 
 <style>
-  main {
-    display: flex;
-    flex-direction: row;
-  }
-
   img {
-    width: 300px;
+    max-width: 100%;
   }
 </style>

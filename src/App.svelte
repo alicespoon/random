@@ -1,6 +1,9 @@
 <script>
   import { onMount } from "svelte";
+  import Packery from "packery";
+
   import Card from "./lib/Card.svelte";
+  import Header from "./lib/Header.svelte";
 
   const apiUrl = "https://api.airtable.com/v0/";
   const baseId = "appH98tK7apH08Hlx";
@@ -17,13 +20,19 @@
     fetch(url, { headers })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         posts = data.records.map((record) => {
           return {
             igurl: record.fields["url"],
             images: record.fields["images"],
           };
         });
-        console.log(posts);
+      })
+      .then(() => {
+        const base = document.querySelector("main");
+        const pckry = new Packery(base, {
+          gutter: 48,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -31,6 +40,7 @@
   });
 </script>
 
+<Header />
 <main>
   {#each posts as post}
     <Card {...post} />
