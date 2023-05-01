@@ -27,9 +27,12 @@
             images: record.fields["images"],
           };
         });
+        console.log(posts);
+
       })
       .then(() => {
         const base = document.querySelector("main");
+        console.log(base.children);
         const pckry = new Packery(base, {
           gutter: 48,
         });
